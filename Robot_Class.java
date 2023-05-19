@@ -1,7 +1,5 @@
 import io.github.bonigarcia.wdm.WebDriverManager;
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.testng.annotations.BeforeTest;
@@ -15,7 +13,7 @@ public class Robot_Class {
     public static WebDriver driver;
 
     @BeforeTest
-    public void Driver() {
+    public void setDriver() {
         //System.setProperty("webdriver.chrome.driver","C:\\Users\\user\\Downloads\\chromedriver_win32\\chromedriver.exe");
         //driver = new ChromeDriver();
         ChromeOptions options = new ChromeOptions();
@@ -70,26 +68,7 @@ public class Robot_Class {
         robot.keyRelease (KeyEvent.VK_ENTER);
 
     }
-    @Test
-    public void New_Reg() throws InterruptedException {
-        driver.get("https://www.facebook.com/");
-        driver.manage().window().maximize();
-        Thread.sleep(5000);
-        driver.findElement(By.partialLinkText("Create new ")).click();
-        Thread.sleep(5000);
-        WebElement firstname= driver.findElement(By.name("firstname"));
-        Thread.sleep(2000);
-        firstname.sendKeys( "shweta");
-        Thread.sleep(2000);
-        WebElement Lastname= driver.findElement(By.name("lastname"));
-        Lastname.sendKeys("sshwetaaa");
-        Thread.sleep(2000);
-        WebElement em = driver.findElement(By.name("reg_email__"));
-        em.sendKeys("shwetashriram93@gmail.com");
-        Thread.sleep(5000);
-        WebElement pass= driver.findElement(By.name("reg_passwd__"));
-        pass.sendKeys("shhwetaaaa");
-        Thread.sleep(5000);
 
-    }
+
+
 }
