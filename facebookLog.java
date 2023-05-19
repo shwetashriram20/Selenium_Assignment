@@ -3,14 +3,17 @@ import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.io.FileHandler;
+import org.openqa.selenium.support.ui.Select;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
+
+
 import java.io.File;
 import java.io.IOException;
 
 
 public class facebookLog {
-    public WebDriver driver;
+
 
     @BeforeMethod
     public void setup() {
@@ -24,7 +27,7 @@ public class facebookLog {
     }
 
     @Test
-    public void FBook() throws InterruptedException {
+    public void Web_driver() throws InterruptedException {
         driver.get("https://www.facebook.com/");
         driver.manage().window().maximize();
         String url = driver.getCurrentUrl();
@@ -42,24 +45,54 @@ public class facebookLog {
         //web drives here
     }
 
-
-
     @Test
     public void Login_User() throws InterruptedException {
         driver.get("https://www.facebook.com/");
         driver.manage().window().maximize();
         Thread.sleep(2000);
-//        driver.findElement(By.id("email")).sendKeys("shwetashriram20@gmail.com");
-//        driver.findElement(By.name("pass")).sendKeys("sshweta");
-//        driver.findElement(By.name("login")).click();
+        driver.findElement(By.id("email")).sendKeys("shwetashriram20@gmail.com");
+        driver.findElement(By.name("pass")).sendKeys("sshweta");
+        driver.findElement(By.name("login")).click();
 
-        driver.findElement(By.cssSelector("input#email")).sendKeys("shwetashriram20@gmail.com");
-
-        //      driver.findElement(By.xpath("//input[name='pass']")).sendKeys("sshweta");
-        //      driver.findElement(By.xpath("//button[contains(text(),'Log')]")).click();
 
     }
+    @Test
+    public void New_Reg() throws InterruptedException {
+        driver.get("https://www.facebook.com/");
+        driver.manage().window().maximize();
+        Thread.sleep(5000);
+        driver.findElement(By.partialLinkText("Create new ")).click();
+        Thread.sleep(5000);
+        WebElement firstname= driver.findElement(By.name("firstname"));
+        Thread.sleep(2000);
+        firstname.sendKeys( "shweta");
+        Thread.sleep(2000);
+        WebElement Lastname= driver.findElement(By.name("lastname"));
+        Lastname.sendKeys("sshwetaaa");
+        Thread.sleep(2000);
+        WebElement em = driver.findElement(By.name("reg_email__"));
+        em.sendKeys("shwetashriram93@gmail.com");
+        Thread.sleep(5000);
+        WebElement pass= driver.findElement(By.name("reg_passwd__"));
+        pass.sendKeys("shhwetaaaa");
+        Thread.sleep(5000);
+        WebElement element1 = driver.findElement(By.name("birthday_day"));
+        Select day = new Select(element1);
+        day.selectByIndex(20);
+        WebElement element2 = driver.findElement(By.name("birthday_month"));
+        Select Month = new Select(element2);
+        Month.selectByValue("2");
+        WebElement element3 = driver.findElement(By.name("birthday_year"));
+        Select year = new Select(element3);
+        year.selectByVisibleText("1995");
+        Thread.sleep(2000);
+        WebElement element = driver.findElement(By.className("_58mt"));
+        element.click();
+        driver.findElement(By.name("websubmit")).click();
+        Thread.sleep(2000);
+        driver.close();
 
+    }
     @Test
     public void Screenshot() throws InterruptedException, IOException {
         driver.get("https://www.facebook.com/");
@@ -75,110 +108,11 @@ public class facebookLog {
         File dfile = new File("C:\\Users\\ABC\\Downloads\\Facebook_Auto\\shot" + "Fb.png");
         FileHandler.copy(sfile, dfile);
     }
-
-    @Test
-    public void Clear() throws InterruptedException {
-        driver.get("https://www.facebook.com/");
-        driver.manage().window().maximize();
-        Thread.sleep(2000);
-
-        WebElement ele = driver.findElement(By.id("email"));
-        ele.sendKeys("shwetashriram20@gmail.com");
-        ele.clear();
-        ele.sendKeys("shweta@gmail.com");
-    }
-
-    @Test
-    public void Attribute() throws InterruptedException {
-        driver.get("https://www.facebook.com/");
-        driver.manage().window().maximize();
-        Thread.sleep(2000);
-
-        //sendkey
-        WebElement ele = driver.findElement(By.id("pass"));
-        ele.sendKeys("sshweta");
-
-        String attribute = ele.getAttribute("placeholder");
-        System.out.println(attribute);
-    }
-
-    @Test
-    public void Location_Method() throws InterruptedException {
-        driver.get("https://www.facebook.com/");
-        driver.manage().window().maximize();
-        Thread.sleep(2000);
-        WebElement ema = driver.findElement(By.xpath("//input[@id='email']"));// get location any also pass
-        int emax = ema.getLocation().getX();
-        int emay = ema.getLocation().getY();
-        System.out.println("Email getx :" + emax);
-        System.out.println("Email gety :" + emay);
-    }
-
-    @Test
-    public void GetText() throws InterruptedException {
-        driver.get("https://www.facebook.com/");
-        driver.manage().window().maximize();
-        Thread.sleep(2000);
-        WebElement ele = driver.findElement(By.xpath("//button[@name='login']"));
-        //getText
-        String text = ele.getText();
-        System.out.println("Text Name :" + text);
-        //TagName
-        String tagName = ele.getTagName();
-        System.out.println("Tag Name :" + tagName);
-        //submit
-        ele.submit();
-
-    }
-
-    @Test
-    public void isDisplayed() throws InterruptedException {
-
-        driver.get("https://www.facebook.com/");
-        driver.manage().window().maximize();
-        Thread.sleep(2000);
-        WebElement Dis = driver.findElement(By.xpath("//input[@id='email']"));
-
-        Boolean display = Dis.isDisplayed();
-        System.out.println("Email field is displayed :" + display);
-    }
-
-    @Test
-    public void isEnable() throws InterruptedException {
-
-        driver.get("https://www.facebook.com/");
-        driver.manage().window().maximize();
-        Thread.sleep(2000);
-        WebElement Dis = driver.findElement(By.xpath("//input[@id='email']"));
-
-        Boolean Enable = Dis.isEnabled();
-        System.out.println("Email field is Enable :" + Enable);
-
-    }
-
-    @Test
-    public void isSelected() throws InterruptedException {
-
-        driver.get("https://www.facebook.com/");
-        driver.manage().window().maximize();
-        Thread.sleep(2000);
-        WebElement Dis = driver.findElement(By.xpath("//input[@id='email']"));
-
-        boolean status = Dis.isSelected();
-        System.out.println("isSelected status :" + status);
-    }
-    @Test
-    public void GetSize() throws InterruptedException {
-        driver.get("https://www.facebook.com/");
-        driver.manage().window().maximize();
-        Thread.sleep(2000);
-        WebElement di = driver.findElement(By.xpath("//input[@id='email']"));
-        int dix = di.getSize().getHeight();
-        int diy = di.getSize().getWidth();
-
-        System.out.println("Email Height :" + dix);
-        System.out.println("Email Width :" + diy);
-    }
-
-
 }
+
+
+
+
+
+
+
